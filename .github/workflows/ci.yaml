@@ -9,8 +9,10 @@ jobs:
   linting:
     # Name of job is linting
     # Where this job will be run 
-    runs-on: ubuntu-latest
-    
+    runs-on: ${{matrix.os}}
+    strategy:
+    matrix:
+    os: [ubuntu-latest,windows-latest,macos-latest]
     # Steps to run that job
     steps:
       # Assigning name and using predefined actions for steps
