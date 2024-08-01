@@ -1,31 +1,32 @@
-# name of workflow
+# Name of workflow
 name: CI
-# trigger on which code will be run
+
+# Trigger on which the code will be run
 on: push
-# name of jobs which can be run parallely
+
+# Jobs which can be run in parallel
 jobs:
-     linting:
-    #  1. name of job is liniting
-    # 2. Where this job will be run 
-     runs-on: ubuntu-latest
-    #  Write down the steps to run that step
-     steps:
-    #  will pass the name to the step and how that step will be run
-    # Assigning name
-    # uses will use where we've to use the predefined things like checkout, python set-up
-     -name: code checkout
-      uses: actions/checkout@v3
-     -name: setup python
-      uses: actions/setup-python@2
-      with:
-           python-version: '3.9'
-          #  Assigning name to the step 
-     -name: install flake8
-    #  to run this step we need to run the commands 
-    # command python -m pip install --upgrade pip
-      run: |
-     python -m pip install --upgrade pip
-     pip install flake8
-    -name: run flake8
-     run: |
-     flake8 main.py
+  linting:
+    # Name of job is linting
+    # Where this job will be run 
+    runs-on: ubuntu-latest
+    
+    # Steps to run that job
+    steps:
+      # Assigning name and using predefined actions for steps
+      - name: Code checkout
+        uses: actions/checkout@v3
+      
+      - name: Setup Python
+        uses: actions/setup-python@2
+        with:
+          python-version: '3.9'
+      
+      - name: Install flake8
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8
+      
+      - name: Run flake8
+        run: |
+          flake8 main.py
