@@ -12,3 +12,4 @@ def mul(a, b):
 print(sub(20, 3))
 print(add(2, 3))
 print(add(2, 3))
+
