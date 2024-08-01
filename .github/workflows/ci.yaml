@@ -2,7 +2,10 @@
 name: CI
 
 # Trigger on which the code will be run
-on: push
+on: 
+push: 
+    branches: main
+  pull_request: 
 
 # Jobs which can be run in parallel
 jobs:
