@@ -17,6 +17,7 @@ jobs:
       uses: actions/checkout@v3
      -name: setup python
       uses: actions/setup-python@2
+      with:
            python-version: '3.9'
           #  Assigning name to the step 
      -name: install flake8
