@@ -3,7 +3,7 @@ name: CI
 
 # Trigger on which the code will be run
 on: 
-push: 
+  push: 
     branches: main
   pull_request: 
 
