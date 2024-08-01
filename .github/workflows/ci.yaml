@@ -37,7 +37,7 @@ jobs:
       - name: Run flake8
         run: |
           flake8 main.py
-   testing:
+    testing:
      runs-on: ${{ matrix.os}}
      strategy:
        matrix:
