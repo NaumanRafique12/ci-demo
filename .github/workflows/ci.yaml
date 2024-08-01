@@ -39,7 +39,8 @@ jobs:
         run: |
           flake8 main.py
 
-  testing:
+  testing: 
+    needs: linting
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
