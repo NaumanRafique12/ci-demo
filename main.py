@@ -10,6 +10,7 @@ def mul(a, b):
     return a * b
 
 
-print(sub(20, 3))
-print(add(2, 3))
-print(add(2, 3))
+if __name__ == '__main__':
+    print(sub(20, 3))
+    print(add(2, 3))
+    print(add(2, 3))
