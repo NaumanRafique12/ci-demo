@@ -66,6 +66,7 @@ jobs:
           python test.py
 
       - name: Create CML report
+        uses: iterative/setup-cml@v2
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
