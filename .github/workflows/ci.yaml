@@ -2,7 +2,10 @@
 name: CI
 
 # Trigger on which the code will be run
-on: push
+on: 
+  push: 
+    branches: main
+  pull_request: 
 
 # Jobs which can be run in parallel
 jobs:
@@ -13,8 +16,9 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest,windows-latest,macos-latest]
-        version: ['3.9','3.10']
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        version: ['3.9', '3.10']
+
     # Steps to run that job
     steps:
       # Assigning name and using predefined actions for steps
@@ -24,7 +28,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version:  ${{ matrix.version }}
+          python-version: ${{ matrix.version }}
       
       - name: Install flake8
         run: |
@@ -34,3 +38,42 @@ jobs:
       - name: Run flake8
         run: |
           flake8 main.py
+
+  testing: 
+    needs: linting
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        version: ['3.9', '3.10']
+
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.version }}
+      - name: CML Set Up
+        uses: iterative/setup-cml@v2
+
+     
+
+      - name: Run tests
+        run: |
+          python test.py
+      
+      - name: Create CML report
+        
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+
+          echo "# First Line of our report" >> report.md
+          echo "## Bar Plots" >> report.md
+          # echo '![](./bars.png "Bar plot")' >> report.md
+          echo "## Line Plots" >> report.md
+          # echo '![](./lines.png "Bar plot")' >> report.md
+
+          cml comment create report.md
